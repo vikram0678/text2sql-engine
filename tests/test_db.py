@@ -86,3 +86,18 @@ class TestDatabaseLifecycle(unittest.TestCase):
         # Close database resources.
         self.cursor.close()
         self.connection.close()
+
+
+    def test_fetch_false(self):
+        """Test row count returned when fetch is False."""
+
+        query = """
+        SELECT customer_id, name, region
+        FROM customers
+        ORDER BY customer_id
+        LIMIT 5;
+        """
+
+        result = execute_query(query, fetch=False)
+
+        self.assertEqual(result, 5)

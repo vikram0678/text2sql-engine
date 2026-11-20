@@ -56,3 +56,16 @@ def execute_query(query, params=None, fetch=True):
         raise
     finally:
         close_connection(connection)
+    def test_fetch_false(self):
+        """Test row count returned when fetch is False."""
+
+        query = """
+        SELECT customer_id, name, region
+        FROM customers
+        ORDER BY customer_id
+        LIMIT 5;
+        """
+
+        result = execute_query(query, fetch=False)
+
+        self.assertEqual(result, 5)
